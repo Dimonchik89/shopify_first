@@ -1,0 +1,45 @@
+.root {
+  @apply grid gap-0 grid-cols-1 lg:grid-cols-3 lg:grid-rows-2;
+
+  & > * {
+    @apply row-span-1 overflow-hidden;
+    max-height: 900px;
+    /* change 800 to 900 */
+
+    @screen lg {
+      height: inherit;
+      /* max-height: 100%; */
+    }
+  }
+
+  & > *:nth-child(6n + 1) > *:nth-child(6n + 1) > *:nth-child(6n + 1) {
+    @apply bg-violet;
+  }
+
+  & > *:nth-child(6n + 3) > *:nth-child(6n + 1) > *:nth-child(6n + 1) {
+    @apply bg-pink;
+  }
+
+  & > *:nth-child(6n + 5) > *:nth-child(6n + 1) > *:nth-child(6n + 1) {
+    @apply bg-black;
+  }
+
+  & > *:nth-child(6n + 6) > *:nth-child(6n + 1) > *:nth-child(6n + 1) {
+    @apply bg-cyan;
+  }
+}
+
+.layoutA {
+  & > *:nth-child(6n + 1), /* 1, 7, 13 */
+  & > *:nth-child(6n + 5) {
+    /* 5, 11, 17 */
+    @apply lg:col-span-2 lg:row-span-2;
+  }
+}
+
+.layoutB {
+  & > *:nth-child(6n + 2),
+  & > *:nth-child(6n + 4) {
+    @apply lg:col-span-2 lg:row-span-2;
+  }
+}

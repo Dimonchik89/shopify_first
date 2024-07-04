@@ -1,0 +1,24 @@
+import { ApiFetcherOptions, ApiFetcherResults } from "@common/types/api"
+
+const fetchApi = async <T>({ query, url }: ApiFetcherOptions): Promise<ApiFetcherResults<T>> => {
+
+    const res = await fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            query: query
+        })
+    })
+
+    const { data, errors } = await res.json()
+
+    if (errors) {
+        throw new Error(errors[0].message ?? errors.message)
+    }
+
+    return { data }
+}
+
+export default fetchApi;
