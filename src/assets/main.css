@@ -1,11 +1,15 @@
-@import "./base.css";
+@import './base.css';
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+body {
+    @apply overflow-x-hidden;
+}
+
 @layer components {
-  .fit {
-    min-height: calc(100vh - 88px);
-  }
+    .fit {
+        min-height: calc(100vh - 88px);
+    }
 }
