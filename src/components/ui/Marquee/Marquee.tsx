@@ -9,6 +9,7 @@ import {
 } from 'swiper/modules';
 import cn from 'classnames';
 import s from './Marquee.module.css';
+import { v4 as uuidv4 } from 'uuid';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
@@ -31,9 +32,7 @@ const Marquee: FC<Props> = ({
             <Swiper
                 spaceBetween={50}
                 slidesPerView={3}
-                onSlideChange={() =>
-                    console.log('slide change')
-                }
+                onSlideChange={() => {}}
                 // pagination={{
                 //     clickable: true,
                 // }}
@@ -48,14 +47,14 @@ const Marquee: FC<Props> = ({
                 }}
             >
                 {children.map((item) => (
-                    <SwiperSlide key={Date.now()}>
+                    <SwiperSlide key={uuidv4()}>
                         <div className={s.container}>
                             {item}
                         </div>
                     </SwiperSlide>
                 ))}
                 {children.map((item) => (
-                    <SwiperSlide key={Date.now()}>
+                    <SwiperSlide key={uuidv4()}>
                         <div className={s.container}>
                             {item}
                         </div>
