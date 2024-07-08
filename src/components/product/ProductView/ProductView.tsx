@@ -1,7 +1,9 @@
+'use client';
+
 import cn from 'classnames';
 import { FC, useState } from 'react';
 import s from './ProductView.module.css';
-import { Container } from '@components/ui';
+import { Button, Container } from '@components/ui';
 import { Product } from '@common/types/product';
 import Image from 'next/image';
 import ProductSlider from '../ProductSlider';
@@ -36,7 +38,7 @@ const ProductView: FC<Props> = ({ product }) => {
                                 <Image
                                     className={s.img}
                                     src={image.url}
-                                    alt={image.alt}
+                                    alt={image.alt ?? ''}
                                     width={1050}
                                     height={1050}
                                     quality="85"
@@ -63,7 +65,14 @@ const ProductView: FC<Props> = ({ product }) => {
                         </div>
                     </section>
                     <div>
-                        <button>Add to Cart</button>
+                        <Button
+                            className={s.button}
+                            onClick={() => {
+                                alert('click add to cart');
+                            }}
+                        >
+                            Add to Cart
+                        </Button>
                     </div>
                 </div>
             </div>

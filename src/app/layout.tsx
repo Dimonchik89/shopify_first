@@ -1,4 +1,5 @@
 import '@assets/main.css';
+import 'keen-slider/keen-slider.min.css';
 import { UiProvider } from '@components/ui/context';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
