@@ -3,6 +3,8 @@ import { Layout } from '@components/common';
 import { getConfig } from '@framework/api/config';
 import { getProduct } from '@framework/product';
 import { Product } from '@common/types/product';
+import { Container } from '@components/ui';
+import ProductView from '@components/product/ProductView';
 
 type Params = {
     slug: string;
@@ -22,7 +24,7 @@ const ProductSlug: FC<Props> = async (props) => {
 
     return (
         <Layout>
-            <div>{JSON.stringify(product, null, 2)}</div>
+            {product && <ProductView product={product} />}
         </Layout>
     );
 };
