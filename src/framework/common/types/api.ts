@@ -1,20 +1,31 @@
 export type ApiFetcherOptions = {
-    url: string;
-    query: string;
-    variables?: Variables;
+  query: string;
+  variables?: Variables;
 };
 
 export type Variables = {
-    [key: string]: string | undefined;
+  [key: string]: string | undefined | any;
 };
 
 export type ApiFetcherResults<T> = {
-    data: T;
+  data: T;
 };
 
 export interface ApiConfig {
-    apiUrl: string;
-    fetch<T>(
-        options: ApiFetcherOptions
-    ): Promise<ApiFetcherResults<T>>;
+  fetch<T>(option: ApiFetcherOptions): Promise<ApiFetcherResults<T>>;
+}
+
+export interface ApiHooks {
+  cart: {
+    useAddItem: any;
+  };
+}
+
+export type ApiFetcher<T = any> = (
+  option: ApiFetcherOptions
+) => Promise<ApiFetcherResults<T>>;
+
+export interface ApiProviderContext {
+  hooks: ApiHooks;
+  fetcher: ApiFetcher;
 }

@@ -5,32 +5,29 @@ import { normalizeProduct } from '@framework/utils';
 import { Product } from '@common/types/product';
 
 type FetchType = {
-    productByHandle: ShopifyProduct;
+  productByHandle: ShopifyProduct;
 };
 
 type ReturnType = {
-    product: Product | null;
+  product: Product | null;
 };
 
 const getProduct = async (options: {
-    config: ApiConfig;
-    variables: Variables;
+  config: ApiConfig;
+  variables: Variables;
 }): Promise<ReturnType> => {
-    const { config, variables } = options;
+  const { config, variables } = options;
 
-    const { data } = await config.fetch<FetchType>({
-        url: config.apiUrl,
-        query: getProductQuery,
-        variables,
-    });
+  const { data } = await config.fetch<FetchType>({
+    query: getProductQuery,
+    variables,
+  });
 
-    const { productByHandle } = data;
+  const { productByHandle } = data;
 
-    return {
-        product: productByHandle
-            ? normalizeProduct(productByHandle)
-            : null,
-    };
+  return {
+    product: productByHandle ? normalizeProduct(productByHandle) : null,
+  };
 };
 
 export default getProduct;
