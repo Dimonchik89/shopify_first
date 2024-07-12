@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -23,36 +19,15 @@
       }
     ],
     "paths": {
-      "@common": [
-        "./src/framework/common"
-      ],
-      "@common/*": [
-        "./src/framework/common/*"
-      ],
-      "@framework": [
-        "./src/framework/shopify"
-      ],
-      "@framework/*": [
-        "./src/framework/shopify/*"
-      ],
-      "@components/*": [
-        "./src/components/*"
-      ],
-      "@assets/*": [
-        "./src/assets/*"
-      ],
-      "@lib/*": [
-        "./src/lib/*"
-      ]
+      "@common": ["./src/framework/common"],
+      "@common/*": ["./src/framework/common/*"],
+      "@framework": ["./src/framework/shopify"],
+      "@framework/*": ["./src/framework/shopify/*"],
+      "@components/*": ["./src/components/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@lib/*": ["./src/lib/*"]
     }
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
 }
