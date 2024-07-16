@@ -1,6 +1,6 @@
 'use client';
 
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { Bag, Cross } from '@components/icons';
 import cn from 'classnames';
 import { useUi } from '@components/ui/context';
@@ -9,7 +9,6 @@ import useCart from '@framework/cart/use-cart';
 const CartSidebar: FC = () => {
   const isEmpty = true;
   const { closeSidebar } = useUi();
-  const cart = useCart();
 
   const rootClass = cn('h-full flex flex-col', {
     'bg-secondary text-secondary': isEmpty,
