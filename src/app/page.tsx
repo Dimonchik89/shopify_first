@@ -10,6 +10,7 @@ export default async function Home() {
   const products = await getAllProducts({
     // apiUrl: config.apiUrl,
     fetch: config.fetch,
+    checkoutCookie: '', // delete
   });
 
   return (
