@@ -10,6 +10,8 @@ const Usernav: FC = () => {
   const { openSidebar } = useUi();
   const { data } = useCart();
 
+  console.log('data', data);
+
   return (
     <nav>
       <ul className={s.list}>

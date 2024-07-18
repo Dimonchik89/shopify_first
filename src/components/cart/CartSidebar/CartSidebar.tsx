@@ -1,10 +1,9 @@
 'use client';
 
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { Bag, Cross } from '@components/icons';
 import cn from 'classnames';
 import { useUi } from '@components/ui/context';
-import useCart from '@framework/cart/use-cart';
 
 const CartSidebar: FC = () => {
   const isEmpty = true;
