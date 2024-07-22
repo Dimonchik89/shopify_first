@@ -1,5 +1,6 @@
 import { AddItemHookDescriptor } from '@framework/cart/use-add-item';
 import { ApiFetcher, ApiFetcherOptions } from './api';
+import { SWRResponse } from 'swr';
 
 export interface ApiHooks {
   cart: {
@@ -10,6 +11,10 @@ export interface ApiHooks {
 
 export type MutationHookContext<Input, Output> = {
   fetch: (input: Input) => Promise<Output>;
+};
+
+export type SWRHookContext<Input, Output> = {
+  useData: (input: Input) => Promise<Output>;
 };
 
 export type HookFetcherContext<Input, Output> = {
@@ -40,10 +45,18 @@ export type MutationHook<H extends HookDescriptor = any> = {
   ): () => (input: H['fetcherInput']) => Promise<H['data']>;
 };
 
-// export type MutationHook<H extends AddItemHookDescriptor> = {
-//   fetcherOptions: HookFetcherOptions;
-//   fetcher: HookFetcherFn<H['fetcherInput'], H['fetcherOutput'], H['data']>;
-//   useHook(
-//     context: MutationHookContext<H['fetcherInput'], H['data']>
-//   ): () => (input: H['fetcherInput']) => Promise<H['data']>;
-// };
+export type UseDataContext = {
+  swrOptions: any;
+};
+
+export type UseData<Data> = (context: UseDataContext) => Data;
+
+export type SWRHook<H extends HookDescriptor = any> = {
+  fetcherOptions: HookFetcherOptions;
+  fetcher: HookFetcherFn<H['fetcherInput'], H['fetcherOutput'], H['data']>;
+  useHook(context: {
+    useData: UseData<SWRResponse<H['data'], any>>;
+  }): () => SWRResponse<H['data'], any>;
+};
+
+export type Hook = MutationHook | SWRHook;
