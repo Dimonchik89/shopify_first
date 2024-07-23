@@ -5,14 +5,16 @@ import cn from 'classnames';
 import { isDark } from '@lib/color';
 
 interface Props {
+  size?: 'sm' | 'md' | 'lg';
   color?: string;
   label?: string;
-  active: boolean;
-  variant: 'size' | 'color' | string;
+  active?: boolean;
+  variant?: 'size' | 'color' | string;
   onClick: () => void;
 }
 
 const Swatch: FC<Props> = ({
+  size = 'md',
   color,
   label,
   variant,
@@ -27,6 +29,7 @@ const Swatch: FC<Props> = ({
     [s.color]: color,
     [s.size]: variant === 'size',
     [s.dark]: color && isDark(color),
+    [s.sm]: size === 'sm',
   });
 
   return (
