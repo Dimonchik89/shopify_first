@@ -26,7 +26,7 @@ const CartItem = ({
   const handleQuantityChange = async (val: number) => {
     if (Number.isInteger(val) && val >= 0) {
       setQuantity(val);
-      await updateItem({
+      updateItem({
         id: item.id,
         quantity: val,
         variantId: item.variantId,
