@@ -1,32 +1,43 @@
 import React, {
-    ButtonHTMLAttributes,
-    FC,
-    PropsWithChildren,
-    ReactNode,
+  ButtonHTMLAttributes,
+  ComponentType,
+  FC,
+  HTMLAttributes,
+  ReactNode,
 } from 'react';
 import cn from 'classnames';
 
 import s from './Button.module.css';
+import LoadingDots from '../LoadingDots';
 
-interface Props
-    extends ButtonHTMLAttributes<HTMLButtonElement> {
-    children: ReactNode | ReactNode[];
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+  children: ReactNode | ReactNode[];
+  isLoading?: boolean;
+  Component?: string | ComponentType<HTMLAttributes<HTMLElement>>;
+  href?: string;
 }
 
 const Button: FC<Props> = ({
-    children,
-    className,
-    ...rest
+  children,
+  className,
+  isLoading = false,
+  Component = 'button',
+  ...rest
 }) => {
-    return (
-        <button
-            className={cn(s.root, className)}
-            type="button"
-            {...rest}
-        >
-            {children}
-        </button>
-    );
+  const rootClassName = cn(s.root, className, {
+    [s.loading]: isLoading,
+  });
+
+  return (
+    <Component className={rootClassName} type="button" {...rest}>
+      {children}
+      {isLoading && (
+        <i className="pl-2 m-0 flex">
+          <LoadingDots />
+        </i>
+      )}
+    </Component>
+  );
 };
 
 export default Button;

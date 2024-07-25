@@ -1,5 +1,5 @@
 'use client';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import s from './Usernav.module.css';
 import Link from 'next/link';
 import { Bag as Cart, Heart } from '@components/icons';
@@ -10,6 +10,10 @@ import { LineItem } from '@common/types/cart';
 const Usernav: FC = () => {
   const { openSidebar } = useUi();
   const { data } = useCart();
+
+  useEffect(() => {
+    console.log('data', data);
+  }, [data]);
 
   const itemsCount =
     data?.lineItems.reduce((count: number, item: LineItem) => {

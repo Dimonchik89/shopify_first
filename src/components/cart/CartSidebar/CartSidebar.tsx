@@ -1,16 +1,17 @@
 'use client';
 
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { Bag, Cross } from '@components/icons';
 import cn from 'classnames';
 import { useUi } from '@components/ui/context';
 import useCart from '@framework/cart/use-cart';
 import { LineItem } from '@common/types/cart';
 import CartItem from '../CartItem';
+import { Button } from '@components/ui';
 
 const CartSidebar: FC = () => {
   const { closeSidebar } = useUi();
-  const { data, isEmpty, mutate } = useCart();
+  const { data, isEmpty } = useCart();
 
   const rootClass = cn('h-full flex flex-col', {
     'bg-secondary text-secondary': isEmpty,
@@ -84,9 +85,9 @@ const CartSidebar: FC = () => {
                 </span>
               </div>
             </div>
-            <button onClick={() => alert('Going to checkout')}>
+            <Button Component="a" href="/api">
               Proceed to Checkout
-            </button>
+            </Button>
           </div>
         </>
       )}

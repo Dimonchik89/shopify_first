@@ -1,7 +1,7 @@
 'use client';
 
 import cn from 'classnames';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import s from './ProductView.module.css';
 import { Button, Container } from '@components/ui';
 import { Product } from '@common/types/product';
@@ -19,6 +19,7 @@ interface Props {
 
 const ProductView: FC<Props> = ({ product }) => {
   const [choices, setChoices] = useState<Choices>({});
+  const [isLoading, setIsLoading] = useState(false);
   const api = useApiProvider();
   const { openSidebar } = useUi();
   const variant = getVariant(product, choices);
@@ -28,14 +29,19 @@ const ProductView: FC<Props> = ({ product }) => {
     try {
       const item = {
         productId: String(product.id),
-        variantId: String(variant?.id),
-        variantOptions: variant?.options,
+        variantId: String(variant ? variant?.id : product.variants[0].id),
+        // variantOptions: variant?.options,
         quantity: 1,
       };
 
-      const output = await addItem(item);
+      setIsLoading(true);
+      await addItem(item);
+
+      setIsLoading(false);
       openSidebar();
-    } catch (error) {}
+    } catch (error) {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -80,7 +86,11 @@ const ProductView: FC<Props> = ({ product }) => {
                         key={`${option.id}-${optValue.label}`}
                         label={optValue.label}
                         color={optValue.hexColor}
-                        active={optValue.label.toLowerCase() === activeChoice}
+                        // active={optValue.label.toLowerCase() === activeChoice}
+                        active={
+                          optValue.label.toLowerCase() ===
+                          activeChoice?.toLowerCase()
+                        }
                         variant={option.displayName}
                         onClick={() => {
                           setChoices({
@@ -99,7 +109,11 @@ const ProductView: FC<Props> = ({ product }) => {
             </div>
           </section>
           <div>
-            <Button className={s.button} onClick={addToCart}>
+            <Button
+              className={s.button}
+              onClick={addToCart}
+              isLoading={isLoading}
+            >
               Add to Cart
             </Button>
           </div>
